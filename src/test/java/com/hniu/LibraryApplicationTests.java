@@ -28,6 +28,6 @@ public class LibraryApplicationTests {
 
     @Test
     public void hello(){
-        System.out.println( bs.selectMenus());
+        //System.out.println( bs.selectMenus());
     }
 }
