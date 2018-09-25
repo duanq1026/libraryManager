@@ -23,6 +23,9 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  data:
+    solr:
+      host: http://www.tiannoyi.com/solr
 mybatis:
   # 指定sql映射文件位置
   mapper-locations: classpath:mapper/*.xml
