@@ -15,7 +15,7 @@ public class ReaderTypesController extends Base {
 	@Autowired
 	private ReaderTypeService readerTypeService;
 
-	// 查询所有角色
+	// 查询所有读者类型
 	@GetMapping("/reader_type")
 	public Object selectAll() {
 		List<ReaderTypes> list= readerTypeService.selectAll();
@@ -25,7 +25,7 @@ public class ReaderTypesController extends Base {
 		return packaging(StateCode.FAIL,list);
 	}
 
-	// 查询指定id的角色
+	// 查询指定id的读者类型
 	@GetMapping("/reader_type/{readerTypeId}")
 	public Object selectReaderType(@PathVariable Integer readerTypeId) {
 		ReaderTypes readerTypes= readerTypeService.selectByPrimaryKey(readerTypeId);
@@ -35,7 +35,7 @@ public class ReaderTypesController extends Base {
         return packaging(StateCode.FAIL,readerTypes);
 	}
 
-	// 修改角色信息
+	// 修改读者类型信息
 	@PutMapping("/reader_type/{readerTypeId}")
 	public Object updateReaderType(ReaderTypes readerTypes) {
 
@@ -45,7 +45,7 @@ public class ReaderTypesController extends Base {
         return packaging(StateCode.FAIL,null);
 	}
 
-	// 新增角色
+	// 新增读者类型
 	@PostMapping("/reader_type")
 	public Object insertReaderType(ReaderTypes readerTypes) {
         if(readerTypeService.insert(readerTypes) > 0){
@@ -54,7 +54,7 @@ public class ReaderTypesController extends Base {
         return packaging(StateCode.FAIL,null);
 	}
 
-	// 删除角色
+	// 删除读者类型
 	@DeleteMapping("/reader_type/{readerTypeId}")
 	public Object deleteReaderType(@PathVariable Integer readerTypeId) {
         if(readerTypeService.deleteByPrimaryKey(readerTypeId) > 0){

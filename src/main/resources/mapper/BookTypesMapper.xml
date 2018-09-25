@@ -44,4 +44,9 @@
     select book_type_id, book_type_name, father_node, class_number
     from tbl_book_types
   </select>
+  <select id="selectByFatherNode" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select book_type_id, book_type_name, father_node, class_number
+    from tbl_book_types
+    where father_node = #{fatherNode}
+  </select>
 </mapper>

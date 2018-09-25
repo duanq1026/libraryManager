@@ -14,4 +14,7 @@ public interface BookTypesMapper {
     List<BookTypes> selectAll();
 
     int updateByPrimaryKey(BookTypes record);
+
+    List<BookTypes> selectByFatherNode(Integer fatherNode);
+
 }
