@@ -55,19 +55,25 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public int insertBook(Books books, String barCode) {
-        if(StringUtils.isEmpty(books.getIsbn())|| StringUtils.isEmpty(barCode)){
+        String flag = "1";
+        if(StringUtils.isEmpty(books.getIsbn())){
             return 0;
+        }
+        if(StringUtils.isEmpty(barCode)){
+            flag = "0";
         }
         int resut;
         Books ibsn= selectByIbsn(books.getIsbn());
         if(ibsn!=null){
-            books = ibsn;
-            booksMapper.addNumber(ibsn.getBookId());
-            resut =1;
-        }else {
-            if (books.getNumber()>1){
-                books.setNumber(new Short("1"));
+            if(flag.equals(1)){
+                books = ibsn;
+                booksMapper.addNumber(ibsn.getBookId());
+                resut =1;
+            }else{
+                return 0;
             }
+        }else {
+            books.setNumber(new Short(flag));
             SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒");
             Date date = new Date();
             String dateString = format.format(date);
@@ -77,12 +83,15 @@ public class BookServiceImpl implements BookService {
             searchMapper.addBookVo(books);
             resut =1;
         }
-        BookStates bookStates = new BookStates();
-        bookStates.setBarCode(barCode);
-        bookStates.setBookId(books.getBookId());
-        bookStates.setBookStateId(0);
-        bookStates.setBorrowNumber(new Short("0"));
-        bookStatesMapper.insert(bookStates);
+        if (flag.equals("1")){
+            BookStates bookStates = new BookStates();
+            bookStates.setBarCode(barCode);
+            bookStates.setBookId(books.getBookId());
+            bookStates.setBookStateId(0);
+            bookStates.setBorrowNumber(new Short("0"));
+            bookStatesMapper.insert(bookStates);
+        }
+
         return resut;
     }
 

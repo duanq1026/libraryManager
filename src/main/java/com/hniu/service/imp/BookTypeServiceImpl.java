@@ -19,7 +19,16 @@ public class BookTypeServiceImpl implements BookTypeService {
 
     @Override
     public int deleteByPrimaryKey(Integer bookTypeId) {
+        List<BookTypes> list= selectByFatherNode(bookTypeId);
+        if(list.isEmpty()){
+            return bookTypesMapper.deleteByPrimaryKey(bookTypeId);
+        }else {
+            for(BookTypes bookType:list){
+                deleteByPrimaryKey(bookType.getBookTypeId());
+            }
+        }
         return bookTypesMapper.deleteByPrimaryKey(bookTypeId);
+
     }
 
     @Override
@@ -41,4 +50,11 @@ public class BookTypeServiceImpl implements BookTypeService {
     public int updateByPrimaryKey(BookTypes record) {
         return bookTypesMapper.updateByPrimaryKey(record);
     }
+
+    @Override
+    public List<BookTypes> selectByFatherNode(Integer fatherNode) {
+        return bookTypesMapper.selectByFatherNode(fatherNode);
+    }
+
+
 }
