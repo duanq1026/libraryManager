@@ -30,7 +30,7 @@ public interface BookService {
      * @param books
      * @return
      */
-    int insertBook(Books books, String barCode) ;
+    int  insertBook(Books books, String barCode) ;
 
     /**
      * 根据id删除书
