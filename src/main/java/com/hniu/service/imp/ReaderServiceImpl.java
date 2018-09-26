@@ -34,7 +34,7 @@ public class ReaderServiceImpl implements ReaderService {
     }
 
     @Override
-    public int insert(Readers record) {
+    public synchronized int insert(Readers record) {
 		if(StringUtils.isEmpty(record.getReaderName())) {
 			return 0;
 		}

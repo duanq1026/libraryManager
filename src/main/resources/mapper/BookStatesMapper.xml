@@ -16,9 +16,9 @@
     where book_state_id = #{bookStateId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hniu.entity.BookStates">
-    insert into tbl_book_states (book_state_id, book_id, bar_code,
+    insert into tbl_book_states (book_id, bar_code,
       state, borrow_number)
-    values (#{bookStateId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{barCode,jdbcType=VARCHAR},
+    values (#{bookId,jdbcType=INTEGER}, #{barCode,jdbcType=VARCHAR},
       #{state,jdbcType=TINYINT}, #{borrowNumber,jdbcType=SMALLINT})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.hniu.entity.BookStates">

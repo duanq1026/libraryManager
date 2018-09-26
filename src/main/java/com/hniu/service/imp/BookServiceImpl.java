@@ -54,7 +54,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public int insertBook(Books books, String barCode) {
+    public synchronized int  insertBook(Books books, String barCode) {
         String flag = "1";
         if(StringUtils.isEmpty(books.getIsbn())){
             return 0;
@@ -65,15 +65,14 @@ public class BookServiceImpl implements BookService {
         int resut;
         Books ibsn= selectByIbsn(books.getIsbn());
         if(ibsn!=null){
-            if(flag.equals(1)){
+            if(flag.equals("1")){
                 books = ibsn;
-                booksMapper.addNumber(ibsn.getBookId());
                 resut =1;
             }else{
                 return 0;
             }
         }else {
-            books.setNumber(new Short(flag));
+            books.setNumber(new Short("0"));
             SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒");
             Date date = new Date();
             String dateString = format.format(date);
@@ -87,7 +86,7 @@ public class BookServiceImpl implements BookService {
             BookStates bookStates = new BookStates();
             bookStates.setBarCode(barCode);
             bookStates.setBookId(books.getBookId());
-            bookStates.setBookStateId(0);
+            bookStates.setState((byte) 0);
             bookStates.setBorrowNumber(new Short("0"));
             bookStatesMapper.insert(bookStates);
         }
